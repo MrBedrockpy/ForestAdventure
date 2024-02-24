@@ -18,8 +18,6 @@ public class Game {
 
     public static Scanner scanner = new Scanner(System.in);
 
-    private static boolean testerMode = false;
-
     public static void start() {
 
         history();
@@ -35,8 +33,6 @@ public class Game {
         World world = WorldGenerator.generate(20, 20);
 
         Player player = new Player(new Position(10, 10));
-
-        if (testerMode) {player.getInventory().addItem(Item.GOLDEN_KEY);}
 
         while (true) {
 
@@ -199,7 +195,7 @@ public class Game {
                 }
             }
 
-            screen(lines);
+            GameUtil.screen(lines);
 
             System.out.print(" > ");
             int input = scanner.nextInt();
@@ -275,7 +271,7 @@ public class Game {
 
                         lines.add(" ");
 
-                        screen(lines);
+                        GameUtil.screen(lines);
 
                         System.out.print(" > ");
                         int input = scanner.nextInt();
@@ -309,7 +305,7 @@ public class Game {
 
         lines.add(" ");
 
-        screen(lines);
+        GameUtil.screen(lines);
 
         System.out.print(" > ");
         int input = scanner.nextInt();
@@ -330,33 +326,47 @@ public class Game {
 
     private static void history() {
 
-        System.out.println(
-                "Война! Война никогда не меняется.\n" +
-                "Война началась снова. Но эта война\n" +
-                "стирает все живое на планете.\n" +
-                "Единственный способ выжить - уйти\n" +
-                "от цивилизации!\n"
-        );
+        List<String> lines = new ArrayList<>();
+
+        lines.add(" ");
+
+        lines.add(" Война! Война никогда не меняется. ");
+        lines.add(" Война началась снова. Но эта война ");
+        lines.add(" стирает все живое на планете. ");
+        lines.add(" Единственный способ выжить - уйти ");
+        lines.add(" от цивилизации! ");
+
+        lines.add(" ");
+
+        GameUtil.screen(lines);
+
+        System.out.println();
 
         System.out.println("Введите любой символ");
 
         System.out.print(" > ");
 
-        if (scanner.next().equals("test12321")) {
-            testerMode = true;
-        }
+        scanner.next();
 
         GameUtil.clearConsole();
 
-        System.out.println(
-                " Я был не один такого мнения,\n" +
-                "поэтому я присоединился к общине,\n" +
-                "которая решила поселится в лесу.\n" +
-                "По пути до места, упал в яму и\n" +
-                "потерял сознание...\n" +
-                " Когда я проснулся, не моих вещей,\nне отряда не было." +
-                "Меня обокрали и оставили...\n"
-        );
+        lines.clear();
+
+        lines.add(" ");
+
+        lines.add("  Я был не один такого мнения, ");
+        lines.add(" поэтому я присоединился к общине, ");
+        lines.add(" которая решила поселится подальше от всех. ");
+        lines.add(" По пути до места, упал в яму и ");
+        lines.add(" потерял сознание... ");
+        lines.add("  Когда я проснулся, не моих вещей, не отряда ");
+        lines.add(" не было. Меня обокрали и оставили в яме... ");
+
+        lines.add(" ");
+
+        GameUtil.screen(lines);
+
+        System.out.println(" ");
 
         System.out.println("Введите любой символ");
 
@@ -370,21 +380,25 @@ public class Game {
 
     private static void first_quest() {
 
-        System.out.println(
-                "   Для начала нужно выбротся из ямы.\n" +
-                "   Введите последовательность движений,\n" +
-                "   для того, чтобы выбротся из ямы.\n"
-        );
+        List<String> lines = new ArrayList<>();
 
-        System.out.println(
-                "===========================\n" +
-                "| 1. Левая рука           |\n" +
-                "| 2. Правая рука          |\n" +
-                "| 3. Левая нога           |\n" +
-                "| 4. Правая нога          |\n" +
-                "| 5. Прыжок               |\n" +
-                "===========================\n"
-        );
+        lines.add(" ");
+
+        lines.add(" Для начала нужно выбротся из ямы. ");
+        lines.add(" Введите последовательность движений, ");
+        lines.add(" для того, чтобы выбротся из ямы. ");
+
+        lines.add(" ");
+
+        lines.add(" 1. Левая рука ");
+        lines.add(" 2. Правая рука ");
+        lines.add(" 3. Левая нога ");
+        lines.add(" 4. Правая нога ");
+        lines.add(" 5. Прыжок ");
+
+        lines.add(" ");
+
+        GameUtil.screen(lines);
 
         System.out.println("Введите код из 5 цифр.");
 
@@ -396,7 +410,7 @@ public class Game {
         GameUtil.clearConsole();
 
         for (char sym : enter.toCharArray()) {
-            if (!(Character.isDigit(sym)) || !(Character.getNumericValue(sym) > 0 && Character.getNumericValue(sym) < 6)) {
+            if (!(Character.isDigit(sym)) || !(Character.getNumericValue(sym) > 1 && Character.getNumericValue(sym) < 6)) {
                 System.out.println("Недопустимое значение!");
                 GameUtil.sleep(1);
                 GameUtil.clearConsole();
@@ -429,40 +443,6 @@ public class Game {
         GameUtil.sleep(1);
         GameUtil.clearConsole();
         first_quest();
-
-    }
-
-    private static void screen(List<String> lines) {
-        int maxLength = 0;
-        for (String line: lines) {
-            if (line.length() > maxLength) {
-                maxLength = line.length();
-            }
-        }
-        maxLength += 3;
-
-        for (int i = 0; i < maxLength + 4; i++) {
-            System.out.print("=");
-        }
-        System.out.println();
-
-        for (String line: lines) {
-
-            System.out.print("| ");
-
-            System.out.print(line);
-
-            for (int i = 0; i < maxLength - line.length(); i++) {
-                System.out.print(" ");
-            }
-            System.out.println(" |");
-
-        }
-
-        for (int i = 0; i < maxLength + 4; i++) {
-            System.out.print("=");
-        }
-        System.out.println();
 
     }
 

@@ -1,6 +1,7 @@
 package ru.mrbedrockpy.forestadventure;
 
 import java.io.IOException;
+import java.util.List;
 
 public class GameUtil {
 
@@ -18,6 +19,40 @@ public class GameUtil {
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void screen(List<String> lines) {
+        int maxLength = 0;
+        for (String line: lines) {
+            if (line.length() > maxLength) {
+                maxLength = line.length();
+            }
+        }
+        maxLength += 3;
+
+        for (int i = 0; i < maxLength + 4; i++) {
+            System.out.print("=");
+        }
+        System.out.println();
+
+        for (String line: lines) {
+
+            System.out.print("| ");
+
+            System.out.print(line);
+
+            for (int i = 0; i < maxLength - line.length(); i++) {
+                System.out.print(" ");
+            }
+            System.out.println(" |");
+
+        }
+
+        for (int i = 0; i < maxLength + 4; i++) {
+            System.out.print("=");
+        }
+        System.out.println();
+
     }
 
 }
