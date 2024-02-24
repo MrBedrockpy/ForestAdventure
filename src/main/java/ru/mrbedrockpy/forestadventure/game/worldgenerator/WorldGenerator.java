@@ -1,10 +1,10 @@
-package ru.mrbedrockpy.mygame.game.worldgenerator;
+package ru.mrbedrockpy.forestadventure.game.worldgenerator;
 
 import org.jetbrains.annotations.Nullable;
-import ru.mrbedrockpy.mygame.game.world.World;
-import ru.mrbedrockpy.mygame.game.world.territory.Location;
-import ru.mrbedrockpy.mygame.game.position.Position;
-import ru.mrbedrockpy.mygame.game.world.territory.Territory;
+import ru.mrbedrockpy.forestadventure.game.world.World;
+import ru.mrbedrockpy.forestadventure.game.world.territory.Location;
+import ru.mrbedrockpy.forestadventure.game.position.Position;
+import ru.mrbedrockpy.forestadventure.game.world.territory.Territory;
 
 import java.util.ArrayList;
 import java.util.List;

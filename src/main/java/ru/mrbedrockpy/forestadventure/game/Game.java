@@ -1,16 +1,16 @@
-package ru.mrbedrockpy.mygame.game;
+package ru.mrbedrockpy.forestadventure.game;
 
-import ru.mrbedrockpy.mygame.GameUtil;
-import ru.mrbedrockpy.mygame.game.input.InventoryInput;
-import ru.mrbedrockpy.mygame.game.inventory.Inventory;
-import ru.mrbedrockpy.mygame.game.item.Item;
-import ru.mrbedrockpy.mygame.game.player.Player;
-import ru.mrbedrockpy.mygame.game.position.Position;
-import ru.mrbedrockpy.mygame.game.world.territory.Location;
-import ru.mrbedrockpy.mygame.game.worldgenerator.WorldGenerator;
-import ru.mrbedrockpy.mygame.game.world.World;
-import ru.mrbedrockpy.mygame.game.world.territory.Territory;
-import ru.mrbedrockpy.mygame.game.input.*;
+import ru.mrbedrockpy.forestadventure.GameUtil;
+import ru.mrbedrockpy.forestadventure.game.input.InventoryInput;
+import ru.mrbedrockpy.forestadventure.game.inventory.Inventory;
+import ru.mrbedrockpy.forestadventure.game.item.Item;
+import ru.mrbedrockpy.forestadventure.game.player.Player;
+import ru.mrbedrockpy.forestadventure.game.position.Position;
+import ru.mrbedrockpy.forestadventure.game.world.territory.Location;
+import ru.mrbedrockpy.forestadventure.game.worldgenerator.WorldGenerator;
+import ru.mrbedrockpy.forestadventure.game.world.World;
+import ru.mrbedrockpy.forestadventure.game.world.territory.Territory;
+import ru.mrbedrockpy.forestadventure.game.input.*;
 
 import java.util.*;
 

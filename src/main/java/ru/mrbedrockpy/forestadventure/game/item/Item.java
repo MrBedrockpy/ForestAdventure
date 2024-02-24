@@ -1,4 +1,4 @@
-package ru.mrbedrockpy.mygame.game.item;
+package ru.mrbedrockpy.forestadventure.game.item;
 
 public class Item {
 

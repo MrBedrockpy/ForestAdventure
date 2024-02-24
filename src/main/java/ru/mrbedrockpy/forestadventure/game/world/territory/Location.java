@@ -1,7 +1,7 @@
-package ru.mrbedrockpy.mygame.game.world.territory;
+package ru.mrbedrockpy.forestadventure.game.world.territory;
 
-import ru.mrbedrockpy.mygame.game.item.Item;
-import ru.mrbedrockpy.mygame.game.loottable.LootTable;
+import ru.mrbedrockpy.forestadventure.game.item.Item;
+import ru.mrbedrockpy.forestadventure.game.loottable.LootTable;
 
 import java.util.Arrays;
 import java.util.List;

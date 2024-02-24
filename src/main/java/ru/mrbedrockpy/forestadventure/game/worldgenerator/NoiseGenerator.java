@@ -1,4 +1,4 @@
-package ru.mrbedrockpy.mygame.game.worldgenerator;
+package ru.mrbedrockpy.forestadventure.game.worldgenerator;
 
 import java.util.Random;
 

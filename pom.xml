@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.mrbedrockpy.mygame</groupId>
-    <artifactId>MyGame</artifactId>
-    <version>1.0</version>
+    <groupId>ru.mrbedrockpy.forestadventure</groupId>
+    <artifactId>ForestAdventure</artifactId>
+    <version>beta-1.0</version>
 
     <build>
         <plugins>
@@ -22,7 +22,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>ru.mrbedrockpy.mygame.Main</mainClass>
+                                    <mainClass>ru.mrbedrockpy.forestadventure.Main</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>

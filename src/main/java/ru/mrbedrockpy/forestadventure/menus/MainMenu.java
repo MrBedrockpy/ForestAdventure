@@ -1,8 +1,8 @@
-package ru.mrbedrockpy.mygame.menus;
+package ru.mrbedrockpy.forestadventure.menus;
 
 import org.jetbrains.annotations.Range;
-import ru.mrbedrockpy.mygame.GameUtil;
-import ru.mrbedrockpy.mygame.game.Game;
+import ru.mrbedrockpy.forestadventure.GameUtil;
+import ru.mrbedrockpy.forestadventure.game.Game;
 
 import java.util.Scanner;
 

@@ -1,8 +1,8 @@
-package ru.mrbedrockpy.mygame.game.world;
+package ru.mrbedrockpy.forestadventure.game.world;
 
-import ru.mrbedrockpy.mygame.game.player.Player;
-import ru.mrbedrockpy.mygame.game.position.Position;
-import ru.mrbedrockpy.mygame.game.world.territory.Territory;
+import ru.mrbedrockpy.forestadventure.game.player.Player;
+import ru.mrbedrockpy.forestadventure.game.position.Position;
+import ru.mrbedrockpy.forestadventure.game.world.territory.Territory;
 
 import java.util.List;
 

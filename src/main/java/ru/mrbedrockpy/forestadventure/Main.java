@@ -1,6 +1,6 @@
-package ru.mrbedrockpy.mygame;
+package ru.mrbedrockpy.forestadventure;
 
-import ru.mrbedrockpy.mygame.menus.MainMenu;
+import ru.mrbedrockpy.forestadventure.menus.MainMenu;
 
 public class Main {
 

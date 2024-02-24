@@ -1,4 +1,4 @@
-package ru.mrbedrockpy.mygame.menus;
+package ru.mrbedrockpy.forestadventure.menus;
 
 public class SettingsMenu {
 

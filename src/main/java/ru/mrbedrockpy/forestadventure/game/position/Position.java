@@ -1,4 +1,4 @@
-package ru.mrbedrockpy.mygame.game.position;
+package ru.mrbedrockpy.forestadventure.game.position;
 
 public class Position {
 
