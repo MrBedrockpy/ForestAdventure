@@ -1,4 +1,4 @@
-package ru.mrbedrockpy.mygame;
+package ru.mrbedrockpy.forestadventure;
 
 import java.io.IOException;
 

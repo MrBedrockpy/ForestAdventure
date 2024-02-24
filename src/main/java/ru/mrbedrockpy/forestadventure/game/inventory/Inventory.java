@@ -1,6 +1,6 @@
-package ru.mrbedrockpy.mygame.game.inventory;
+package ru.mrbedrockpy.forestadventure.game.inventory;
 
-import ru.mrbedrockpy.mygame.game.item.Item;
+import ru.mrbedrockpy.forestadventure.game.item.Item;
 
 import java.util.List;
 

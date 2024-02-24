@@ -1,6 +1,6 @@
-package ru.mrbedrockpy.mygame.game.loottable;
+package ru.mrbedrockpy.forestadventure.game.loottable;
 
-import ru.mrbedrockpy.mygame.game.item.Item;
+import ru.mrbedrockpy.forestadventure.game.item.Item;
 
 import java.util.ArrayList;
 import java.util.Map;

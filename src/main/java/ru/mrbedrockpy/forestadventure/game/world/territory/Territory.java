@@ -1,7 +1,7 @@
-package ru.mrbedrockpy.mygame.game.world.territory;
+package ru.mrbedrockpy.forestadventure.game.world.territory;
 
 import org.jetbrains.annotations.Nullable;
-import ru.mrbedrockpy.mygame.game.position.Position;
+import ru.mrbedrockpy.forestadventure.game.position.Position;
 
 public class Territory {
 

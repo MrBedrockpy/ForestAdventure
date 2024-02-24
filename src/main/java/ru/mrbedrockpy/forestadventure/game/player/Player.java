@@ -1,7 +1,7 @@
-package ru.mrbedrockpy.mygame.game.player;
+package ru.mrbedrockpy.forestadventure.game.player;
 
-import ru.mrbedrockpy.mygame.game.inventory.Inventory;
-import ru.mrbedrockpy.mygame.game.position.Position;
+import ru.mrbedrockpy.forestadventure.game.inventory.Inventory;
+import ru.mrbedrockpy.forestadventure.game.position.Position;
 
 import java.util.ArrayList;
 
