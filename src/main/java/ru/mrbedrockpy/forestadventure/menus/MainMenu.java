@@ -12,7 +12,7 @@ public class MainMenu {
 
         System.out.println("        ====================");
 
-        System.out.println("        |  Adventure Game  |");
+        System.out.println("        | Forest Adventure |");
 
         System.out.println("        ====================");
 
@@ -37,18 +37,11 @@ public class MainMenu {
                 break;
 
             case 2:
-
-                System.out.println(" Скоро! ");
-
-                GameUtil.sleep(1);
-
-                GameUtil.clearConsole();
-
-                launch();
-                break;
-
             case 3:
-                SettingsMenu.launch();
+                System.out.println(" Скоро! ");
+                GameUtil.sleep(1);
+                GameUtil.clearConsole();
+                launch();
                 break;
 
             default:
