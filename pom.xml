@@ -6,7 +6,7 @@
 
     <groupId>ru.mrbedrockpy.forestadventure</groupId>
     <artifactId>ForestAdventure</artifactId>
-    <version>beta-1.0</version>
+    <version>beta-2.0</version>
 
     <build>
         <plugins>
