@@ -1,7 +1,6 @@
 package ru.mrbedrockpy.forestadventure.game;
 
 import ru.mrbedrockpy.forestadventure.GameUtil;
-import ru.mrbedrockpy.forestadventure.game.input.InventoryInput;
 import ru.mrbedrockpy.forestadventure.game.inventory.Inventory;
 import ru.mrbedrockpy.forestadventure.game.item.Item;
 import ru.mrbedrockpy.forestadventure.game.player.Player;
@@ -10,15 +9,14 @@ import ru.mrbedrockpy.forestadventure.game.world.territory.Location;
 import ru.mrbedrockpy.forestadventure.game.worldgenerator.WorldGenerator;
 import ru.mrbedrockpy.forestadventure.game.world.World;
 import ru.mrbedrockpy.forestadventure.game.world.territory.Territory;
-import ru.mrbedrockpy.forestadventure.game.input.*;
+import ru.mrbedrockpy.forestadventure.input.*;
+import ru.mrbedrockpy.forestadventure.saves.GameData;
+import ru.mrbedrockpy.forestadventure.saves.LoadGameManager;
+import ru.mrbedrockpy.forestadventure.saves.SaveGameManager;
 
 import java.util.*;
 
 public class Game {
-
-    public static Scanner scanner = new Scanner(System.in);
-
-    private static boolean testerMode = false;
 
     public static void start() {
 
@@ -26,17 +24,27 @@ public class Game {
 
         first_quest();
 
-        game();
-
-    }
-
-    private static void game() {
-
         World world = WorldGenerator.generate(20, 20);
 
         Player player = new Player(new Position(10, 10));
 
-        if (testerMode) {player.getInventory().addItem(Item.GOLDEN_KEY);}
+        game(world, player);
+
+    }
+
+    public static void load() {
+        GameData data = LoadGameManager.loadGame();
+
+        GameUtil.clearConsole();
+
+        if (data == null) {
+            return;
+        }
+
+        game(data.getWorld(), data.getPlayer());
+    }
+
+    private static void game(World world, Player player) {
 
         while (true) {
 
@@ -180,6 +188,23 @@ public class Game {
 
                     // Other
 
+                    lines.add(" " + numInput + ". Сохранить и выйти");
+
+                    controllers.put(numInput, new Input() {
+
+                        @Override
+                        public void function(Player player) {
+                            GameUtil.clearConsole();
+
+                            SaveGameManager.saveGame(new GameData(player, world));
+
+                            System.exit(0);
+                        }
+
+                    });
+
+                    numInput++;
+
                     lines.add(" " + numInput + ". Выйти из игры");
 
                     controllers.put(numInput, new Input() {
@@ -199,12 +224,17 @@ public class Game {
                 }
             }
 
-            screen(lines);
+            GameUtil.screen(lines);
 
             System.out.print(" > ");
-            int input = scanner.nextInt();
+            int input = GameUtil.scanner.nextInt();
 
-            controllers.get(input).function(player);
+            try {
+                controllers.get(input).function(player);
+            } catch (NullPointerException e) {
+                GameUtil.clearConsole();
+                System.out.println("Некорректный вариант");
+            }
 
             GameUtil.sleep(0.5);
             GameUtil.clearConsole();
@@ -264,21 +294,16 @@ public class Game {
                         lines.add(" ");
 
                         lines.add(" " + numInput + ". Отмена");
-                        controllers.put(numInput, new InventoryInput() {
-
-                            @Override
-                            public void function(Inventory inventory, Item item) {
-
-                            }
+                        controllers.put(numInput, (inventory1, item1) -> {
 
                         });
 
                         lines.add(" ");
 
-                        screen(lines);
+                        GameUtil.screen(lines);
 
                         System.out.print(" > ");
-                        int input = scanner.nextInt();
+                        int input = GameUtil.scanner.nextInt();
 
                         GameUtil.sleep(0.5);
                         GameUtil.clearConsole();
@@ -309,10 +334,10 @@ public class Game {
 
         lines.add(" ");
 
-        screen(lines);
+        GameUtil.screen(lines);
 
         System.out.print(" > ");
-        int input = scanner.nextInt();
+        int input = GameUtil.scanner.nextInt();
 
         GameUtil.sleep(0.5);
         GameUtil.clearConsole();
@@ -330,39 +355,53 @@ public class Game {
 
     private static void history() {
 
-        System.out.println(
-                "Война! Война никогда не меняется.\n" +
-                "Война началась снова. Но эта война\n" +
-                "стирает все живое на планете.\n" +
-                "Единственный способ выжить - уйти\n" +
-                "от цивилизации!\n"
-        );
+        List<String> lines = new ArrayList<>();
+
+        lines.add(" ");
+
+        lines.add(" Война! Война никогда не меняется. ");
+        lines.add(" Война началась снова. Но эта война ");
+        lines.add(" стирает все живое на планете. ");
+        lines.add(" Единственный способ выжить - уйти ");
+        lines.add(" от цивилизации! ");
+
+        lines.add(" ");
+
+        GameUtil.screen(lines);
+
+        System.out.println();
 
         System.out.println("Введите любой символ");
 
         System.out.print(" > ");
 
-        if (scanner.next().equals("test12321")) {
-            testerMode = true;
-        }
+        GameUtil.scanner.next();
 
         GameUtil.clearConsole();
 
-        System.out.println(
-                " Я был не один такого мнения,\n" +
-                "поэтому я присоединился к общине,\n" +
-                "которая решила поселится в лесу.\n" +
-                "По пути до места, упал в яму и\n" +
-                "потерял сознание...\n" +
-                " Когда я проснулся, не моих вещей,\nне отряда не было." +
-                "Меня обокрали и оставили...\n"
-        );
+        lines.clear();
+
+        lines.add(" ");
+
+        lines.add("  Я был не один такого мнения, ");
+        lines.add(" поэтому я присоединился к общине, ");
+        lines.add(" которая решила поселится подальше от всех. ");
+        lines.add(" По пути до места, упал в яму и ");
+        lines.add(" потерял сознание... ");
+        lines.add("  Когда я проснулся, не моих вещей, не отряда ");
+        lines.add(" не было. Меня обокрали и оставили в яме... ");
+
+        lines.add(" ");
+
+        GameUtil.screen(lines);
+
+        System.out.println(" ");
 
         System.out.println("Введите любой символ");
 
         System.out.print(" > ");
 
-        scanner.next();
+        GameUtil.scanner.next();
 
         GameUtil.clearConsole();
 
@@ -370,27 +409,31 @@ public class Game {
 
     private static void first_quest() {
 
-        System.out.println(
-                "   Для начала нужно выбротся из ямы.\n" +
-                "   Введите последовательность движений,\n" +
-                "   для того, чтобы выбротся из ямы.\n"
-        );
+        List<String> lines = new ArrayList<>();
 
-        System.out.println(
-                "===========================\n" +
-                "| 1. Левая рука           |\n" +
-                "| 2. Правая рука          |\n" +
-                "| 3. Левая нога           |\n" +
-                "| 4. Правая нога          |\n" +
-                "| 5. Прыжок               |\n" +
-                "===========================\n"
-        );
+        lines.add(" ");
+
+        lines.add(" Для начала нужно выбротся из ямы. ");
+        lines.add(" Введите последовательность движений, ");
+        lines.add(" для того, чтобы выбротся из ямы. ");
+
+        lines.add(" ");
+
+        lines.add(" 1. Левая рука ");
+        lines.add(" 2. Правая рука ");
+        lines.add(" 3. Левая нога ");
+        lines.add(" 4. Правая нога ");
+        lines.add(" 5. Прыжок ");
+
+        lines.add(" ");
+
+        GameUtil.screen(lines);
 
         System.out.println("Введите код из 5 цифр.");
 
         System.out.print(" > ");
 
-        String enter = scanner.next();
+        String enter = GameUtil.scanner.next();
 
         GameUtil.sleep(0.1);
         GameUtil.clearConsole();
@@ -429,40 +472,6 @@ public class Game {
         GameUtil.sleep(1);
         GameUtil.clearConsole();
         first_quest();
-
-    }
-
-    private static void screen(List<String> lines) {
-        int maxLength = 0;
-        for (String line: lines) {
-            if (line.length() > maxLength) {
-                maxLength = line.length();
-            }
-        }
-        maxLength += 3;
-
-        for (int i = 0; i < maxLength + 4; i++) {
-            System.out.print("=");
-        }
-        System.out.println();
-
-        for (String line: lines) {
-
-            System.out.print("| ");
-
-            System.out.print(line);
-
-            for (int i = 0; i < maxLength - line.length(); i++) {
-                System.out.print(" ");
-            }
-            System.out.println(" |");
-
-        }
-
-        for (int i = 0; i < maxLength + 4; i++) {
-            System.out.print("=");
-        }
-        System.out.println();
 
     }
 
