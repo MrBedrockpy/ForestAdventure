@@ -39,14 +39,29 @@ public class MainMenu {
 
             case 1:
                 Game.start();
+
+                GameUtil.clearConsole();
+
+                launch();
+
                 break;
 
             case 2:
-            case 3:
-                System.out.println(" Скоро! ");
-                GameUtil.sleep(1);
+                Game.load();
+
                 GameUtil.clearConsole();
+
                 launch();
+
+                break;
+
+            case 3:
+                SettingsMenu.launch();
+
+                GameUtil.clearConsole();
+
+                launch();
+
                 break;
 
             default:

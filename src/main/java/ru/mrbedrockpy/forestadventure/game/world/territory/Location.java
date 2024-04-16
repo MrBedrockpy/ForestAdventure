@@ -3,7 +3,6 @@ package ru.mrbedrockpy.forestadventure.game.world.territory;
 import ru.mrbedrockpy.forestadventure.game.item.Item;
 import ru.mrbedrockpy.forestadventure.game.loottable.LootTable;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -11,9 +10,8 @@ public enum Location {
 
     HOUSE(
             "Заброшенный дом",
-            Arrays.asList(
-                    "Кажется, в этом доме уцже давно не кто не живет.",
-                    "А на крыльце лежит какой-то ключ."
+            List.of(
+                    "Кажется, в этом доме уже давно не кто не живет."
             ),
             new LootTable(Map.of(
                     Item.SILVER_KEY, 50,
@@ -23,7 +21,7 @@ public enum Location {
 
     TENT(
             "Палатка",
-            Arrays.asList(
+            List.of(
                     "Кажется тут кто-то живет"
             ),
             new LootTable(Map.of(

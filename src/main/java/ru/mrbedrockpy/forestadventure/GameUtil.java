@@ -2,8 +2,11 @@ package ru.mrbedrockpy.forestadventure;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 public class GameUtil {
+
+    public static Scanner scanner = new Scanner(System.in);
 
     public static void sleep(double time) {
         try {

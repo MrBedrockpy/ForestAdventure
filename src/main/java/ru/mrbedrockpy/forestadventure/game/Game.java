@@ -1,7 +1,6 @@
 package ru.mrbedrockpy.forestadventure.game;
 
 import ru.mrbedrockpy.forestadventure.GameUtil;
-import ru.mrbedrockpy.forestadventure.game.input.InventoryInput;
 import ru.mrbedrockpy.forestadventure.game.inventory.Inventory;
 import ru.mrbedrockpy.forestadventure.game.item.Item;
 import ru.mrbedrockpy.forestadventure.game.player.Player;
@@ -10,13 +9,14 @@ import ru.mrbedrockpy.forestadventure.game.world.territory.Location;
 import ru.mrbedrockpy.forestadventure.game.worldgenerator.WorldGenerator;
 import ru.mrbedrockpy.forestadventure.game.world.World;
 import ru.mrbedrockpy.forestadventure.game.world.territory.Territory;
-import ru.mrbedrockpy.forestadventure.game.input.*;
+import ru.mrbedrockpy.forestadventure.input.*;
+import ru.mrbedrockpy.forestadventure.saves.GameData;
+import ru.mrbedrockpy.forestadventure.saves.LoadGameManager;
+import ru.mrbedrockpy.forestadventure.saves.SaveGameManager;
 
 import java.util.*;
 
 public class Game {
-
-    public static Scanner scanner = new Scanner(System.in);
 
     public static void start() {
 
@@ -24,15 +24,27 @@ public class Game {
 
         first_quest();
 
-        game();
-
-    }
-
-    private static void game() {
-
         World world = WorldGenerator.generate(20, 20);
 
         Player player = new Player(new Position(10, 10));
+
+        game(world, player);
+
+    }
+
+    public static void load() {
+        GameData data = LoadGameManager.loadGame();
+
+        GameUtil.clearConsole();
+
+        if (data == null) {
+            return;
+        }
+
+        game(data.getWorld(), data.getPlayer());
+    }
+
+    private static void game(World world, Player player) {
 
         while (true) {
 
@@ -176,6 +188,23 @@ public class Game {
 
                     // Other
 
+                    lines.add(" " + numInput + ". Сохранить и выйти");
+
+                    controllers.put(numInput, new Input() {
+
+                        @Override
+                        public void function(Player player) {
+                            GameUtil.clearConsole();
+
+                            SaveGameManager.saveGame(new GameData(player, world));
+
+                            System.exit(0);
+                        }
+
+                    });
+
+                    numInput++;
+
                     lines.add(" " + numInput + ". Выйти из игры");
 
                     controllers.put(numInput, new Input() {
@@ -198,9 +227,14 @@ public class Game {
             GameUtil.screen(lines);
 
             System.out.print(" > ");
-            int input = scanner.nextInt();
+            int input = GameUtil.scanner.nextInt();
 
-            controllers.get(input).function(player);
+            try {
+                controllers.get(input).function(player);
+            } catch (NullPointerException e) {
+                GameUtil.clearConsole();
+                System.out.println("Некорректный вариант");
+            }
 
             GameUtil.sleep(0.5);
             GameUtil.clearConsole();
@@ -260,12 +294,7 @@ public class Game {
                         lines.add(" ");
 
                         lines.add(" " + numInput + ". Отмена");
-                        controllers.put(numInput, new InventoryInput() {
-
-                            @Override
-                            public void function(Inventory inventory, Item item) {
-
-                            }
+                        controllers.put(numInput, (inventory1, item1) -> {
 
                         });
 
@@ -274,7 +303,7 @@ public class Game {
                         GameUtil.screen(lines);
 
                         System.out.print(" > ");
-                        int input = scanner.nextInt();
+                        int input = GameUtil.scanner.nextInt();
 
                         GameUtil.sleep(0.5);
                         GameUtil.clearConsole();
@@ -308,7 +337,7 @@ public class Game {
         GameUtil.screen(lines);
 
         System.out.print(" > ");
-        int input = scanner.nextInt();
+        int input = GameUtil.scanner.nextInt();
 
         GameUtil.sleep(0.5);
         GameUtil.clearConsole();
@@ -346,7 +375,7 @@ public class Game {
 
         System.out.print(" > ");
 
-        scanner.next();
+        GameUtil.scanner.next();
 
         GameUtil.clearConsole();
 
@@ -372,7 +401,7 @@ public class Game {
 
         System.out.print(" > ");
 
-        scanner.next();
+        GameUtil.scanner.next();
 
         GameUtil.clearConsole();
 
@@ -404,13 +433,13 @@ public class Game {
 
         System.out.print(" > ");
 
-        String enter = scanner.next();
+        String enter = GameUtil.scanner.next();
 
         GameUtil.sleep(0.1);
         GameUtil.clearConsole();
 
         for (char sym : enter.toCharArray()) {
-            if (!(Character.isDigit(sym)) || !(Character.getNumericValue(sym) > 1 && Character.getNumericValue(sym) < 6)) {
+            if (!(Character.isDigit(sym)) || !(Character.getNumericValue(sym) > 0 && Character.getNumericValue(sym) < 6)) {
                 System.out.println("Недопустимое значение!");
                 GameUtil.sleep(1);
                 GameUtil.clearConsole();
